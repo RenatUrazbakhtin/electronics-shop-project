@@ -14,4 +14,15 @@ def test_Item_calculate_total_price(item):
     assert item.calculate_total_price() == 6
 
 def test_apply_discount(item):
-    assert item.apply_discount() == 2
+    item.apply_discount()
+    assert item.price == 2.0
+
+def test_name(item):
+    assert item.name == "Яблоко"
+
+def test_setter_name():
+    item.name = "колбаса"
+    assert item.name == "колбаса"
+
+
+
