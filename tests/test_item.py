@@ -24,5 +24,10 @@ def test_setter_name():
     item.name = "колбаса"
     assert item.name == "колбаса"
 
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
 
+def test_string_to_number(item):
+    assert item.string_to_number("2") == 2
 

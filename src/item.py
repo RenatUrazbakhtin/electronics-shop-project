@@ -1,3 +1,7 @@
+import csv
+import os.path
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -38,9 +42,27 @@ class Item:
         return self.__name
 
     @name.setter
-    def name(self, new_name):
+    def name(self, new_name) -> None:
         if len(new_name) > 10:
-            f"Длина наименования товара превышает 10 символов"
+            print("Длина наименования товара превышает 10 символов")
         else:
             self.__name = new_name
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        cls.all.clear()
+        with open(os.path.join(os.path.dirname(__file__), "items.csv"), newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                name, price, quantity = row["name"], row["price"], row["quantity"]
+                cls(name, float(price), int(quantity))
+
+
+
+    def string_to_number(self, string):
+        if '.' in string:
+            return int(float(string))
+        else:
+            return int(string)
+
 
