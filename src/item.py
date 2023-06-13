@@ -51,18 +51,18 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         cls.all.clear()
-        with open(os.path.join(os.path.dirname(__file__), "items.csv"), newline='') as csvfile:
+        with open(os.path.join(os.path.dirname(__file__), "items.csv"),encoding="Windows-1251", newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 name, price, quantity = row["name"], row["price"], row["quantity"]
                 cls(name, float(price), int(quantity))
 
 
-
-    def string_to_number(self, string):
-        if '.' in string:
-            return int(float(string))
+    @staticmethod
+    def string_to_number(string_number):
+        if '.' in string_number:
+            return int(float(string_number))
         else:
-            return int(string)
+            return int(string_number)
 
 
