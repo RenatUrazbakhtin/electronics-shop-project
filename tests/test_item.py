@@ -31,3 +31,11 @@ def test_instantiate_from_csv():
 def test_string_to_number():
     assert Item.string_to_number("2") == 2
 
+def test_repr():
+    item1 = Item("Яблоко", 2, 3)
+    assert repr(item1) == "Item('Яблоко', 2, 3)"
+
+def test_str():
+    item1 = Item("Яблоко", 2, 3)
+    assert str(item1) == "Яблоко"
+
