@@ -71,4 +71,11 @@ class Item:
         else:
             return int(string_number)
 
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        else:
+            return None
+
+
 
