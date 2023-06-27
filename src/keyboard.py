@@ -3,18 +3,18 @@ from src.item import Item
 class MixinLan():
     lan = "EN"
     def __init__(self):
-        self.language = MixinLan.lan
+        self.__language = MixinLan.lan
 
     def change_lang(self):
-        if self.language == "EN":
-            self.language = "RU"
-        elif self.language == "RU":
-            self.language = "EN"
+        if self.__language == "EN":
+            self.__language = "RU"
+        elif self.__language == "RU":
+            self.__language = "EN"
         return self
 
     @property
     def language(self):
-        return self.language
+        return self.__language
 
 
 class KeyBoard(Item, MixinLan):
