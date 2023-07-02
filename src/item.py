@@ -6,12 +6,13 @@ class InstantiateCSVError(Exception):
     def __init__(self, *args, **kwargs):
         self.message = args[0] if args else "Файл поврежден"
 
-class Item(InstantiateCSVError):
+class Item:
     """
     Класс для представления товара в магазине.
     """
     pay_rate = 1.0
     all = []
+    file_name = "items.csv"
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -62,10 +63,10 @@ class Item(InstantiateCSVError):
     @classmethod
     def instantiate_from_csv(cls):
         cls.all.clear()
-        if not os.path.exists(os.path.join(os.path.dirname(__file__), "items.csv")):
+        if not os.path.exists(os.path.join(os.path.dirname(__file__), cls.file_name)):
             raise FileNotFoundError("Файл не найден")
 
-        with open(os.path.join(os.path.dirname(__file__), "items.csv"),encoding="Windows-1251", newline='') as csvfile:
+        with open(os.path.join(os.path.dirname(__file__), cls.file_name),encoding="Windows-1251", newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             if "name" not in reader.fieldnames or "price" not in reader.fieldnames or "quantity" not in reader.fieldnames:
                 raise InstantiateCSVError("Файл поврежден")

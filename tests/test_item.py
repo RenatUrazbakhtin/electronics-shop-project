@@ -1,6 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 @pytest.fixture()
 def item():
@@ -45,3 +45,13 @@ def test_add():
     item1 = Item("Смартфон", 10000, 20)
     assert item1 + phone1 == 25
     assert item1 + 3 == None
+
+def test_file_not_found_error():
+    Item.file_name = "test_file"
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv()
+
+def test_InstantiateCSVError():
+    Item.file_name = "wrong_items.csv"
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv()
